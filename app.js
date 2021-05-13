@@ -39,7 +39,7 @@ app.get("/", function (req, res) {
 			listItems = items;
 			res.render("list", { listTitle: "Today", listItems: listItems });
 		}
-	}).catch(err => console.error(err));
+	}).catch((err) => console.error(err));
 	// const dateToday = date.getDate();
 });
 
@@ -57,6 +57,15 @@ app.post("/", function (req, res) {
 		});
 		res.redirect("/");
 	}
+});
+
+app.post("/delete", function (req, res) {
+	const deleteId = req.body.id;
+	console.log(deleteId);
+	Item.findByIdAndRemove(deleteId, function (err) {
+		console.log("Successfully deleted document.");
+		res.redirect("/");
+	}).catch((err) => console.error(err));
 });
 
 app.get("/work", function (req, res) {
