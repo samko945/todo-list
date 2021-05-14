@@ -1,12 +1,13 @@
 <%- include("header") %>
 <div id="heading" class="box">
-	<h1><%= listTitle %></h1>
+	<h1><%= listName %></h1>
 </div>
 <div class="box">
 	<% listItems.forEach(item => { %>
 	<form action="/delete" method="POST">
 		<div class="item">
 			<input type="checkbox" name="id" value="<%= item.id %>"" onChange="this.form.submit()"/>
+			<input type="hidden" name="listName" value="<%= listName %>">
 			<p><%= item.text %></p>
 		</div>
 	</form>
@@ -15,7 +16,7 @@
 
 	<form action="/" method="POST" class="item">
 		<input type="text" name="newItem" placeholder="New Item" autocomplete="off" autofocus />
-		<button type="submit" name="list" value="<%= listTitle %>">+</button>
+		<button type="submit" name="list" value="<%= listName %>">+</button>
 	</form>
 </div>
 <%- include("footer") %>
