@@ -63,7 +63,10 @@ app.post("/delete", function (req, res) {
 });
 
 app.get("/:listName", function (req, res) {
-	const customListName = req.params.listName.split(" ").map(word => _.capitalize(word)).join(" ");
+	const customListName = req.params.listName
+		.split(" ")
+		.map((word) => _.capitalize(word))
+		.join(" ");
 
 	List.findOne({ name: customListName }, async function (err, list) {
 		if (list) {
@@ -84,6 +87,7 @@ app.get("/:listName", function (req, res) {
 // 	res.render("about");
 // });
 
-app.listen(3000, function () {
-	console.log("Server started on port Server started on port 3000.");
+let port = process.env.PORT || 3000;
+app.listen(port, function () {
+	console.log(`Server started on port Server started on port ${port}.`);
 });
